@@ -1,4 +1,4 @@
-# tinyhold
+# 𝔗𝔦𝔫𝔶𝔥𝔬𝔩𝔡
 A tiny town builder for the PICO-8 game console
 
 ![Screenshot](tinyhold_0.png)
