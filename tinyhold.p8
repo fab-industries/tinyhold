@@ -4,15 +4,87 @@ __lua__
 -- game loop
 
 function _init()
+ version="0.00.001"
+ state="title"
+ blnkclr=9
+ blnkindex=1
+ blnkframe=0
+ blnkspd=10
+ blnkseq={9,10}
+ countd=-1
  map_setup()
  make_cursor()
 end
 
 function _update()
+ if state=="title" then
+  update_title()
+ elseif state=="game" then
+  update_game()
+ end
+end
+
+function update_title()
+ blink()
+ -- when ❎ is pressed, this
+ -- makes the text blink faster
+ -- and starts a countdown
+ -- before loading the game
+ if countd<0 then
+  if btnp(❎) then
+ 	 countd=40
+ 	 blnkspd=1
+ 	 blnkseq={9,10,7,10}
+  end
+ else
+  countd-=1
+  if countd<=0 then
+   countd=-1
+   state="game"
+  end
+ end
+end
+
+function update_game()
  move_cursor()
 end
 
 function _draw()
+ cls()
+ if state=="title" then
+  draw_title()
+ elseif state=="game" then
+  draw_game()
+ end
+end
+
+function draw_title()
+ cls()
+ -- title screen encoded into
+ -- string
+ title="`ト`ト`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`wea`♪ea`○ea`z`kem`beb`☉ec`}ec`y`jel`ced`●ee`{ee`eeb`q`iel`cef`░eg`yeg`dec`p`hel`eed`●ef`zef`cee`o`gel`geb`☉ee`{ee`beg`n`fea`hea`jea`웃ee`{ee`ceg`m`oea`⬆️ee`{ee`def`m`neb`jea`iea`eea`ieb`feb`fee`bea`nea`iee`eef`l`mec`iec`gec`cec`ged`ded`eee`aec`lec`hee`fef`k`led`hee`eee`aee`eef`bef`dej`jee`gee`gef`j`kee`geg`cem`ceg`aeg`dek`ief`fee`hef`i`kee`hef`dem`dee`cee`del`geh`eee`geh`h`kee`iee`eee`aef`dee`cee`dee`aef`fec`aef`dee`fec`aef`g`kee`iee`eee`bee`dee`cee`dee`bee`eed`aef`dee`eed`aef`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`def`bee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`deg`aee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`eel`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`fek`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`fek`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`eeb`aec`aee`dee`bee`def`aed`eee`def`aed`h`kee`iee`eee`bee`eea`cea`bee`dee`bee`def`aec`fee`def`aec`i`kef`hee`eee`bee`eea`fee`dee`bee`eeh`gee`eeh`j`keg`gef`def`aef`cea`gee`def`aef`eeg`gef`eeg`j`kee`ieg`cen`bea`gee`den`eee`heg`eee`k`lec`ked`fed`ced`eea`eef`eed`ced`hec`jed`hec`l`mea`meb`heb`eeb`fea`def`geb`eeb`jea`leb`jea`m`ˇea`bef`け`∧eg`こ`❎ee`さ`▤ec`し`▥ea`す`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ogf`bgc`dgf`fgb`bgb`cgb`bge`dgb`cgb`cgd`bgh`bge`cgb`bgf`bgd`n`ngg`bgd`bgg`egc`agc`cgb`agg`bgc`cgb`bgf`agh`agg`agc`agg`agf`m`ngb`fge`bgb`cgb`egb`bgd`bgb`agb`cgc`agb`dgb`agb`cgb`dgb`dgb`cgb`agb`bgb`egb`cgb`m`ngb`egc`agb`bgb`bgb`fgb`bgd`bgb`agb`dgb`agb`dgb`agd`fgc`dgb`cgb`agb`bgb`egd`p`ngf`agb`bgb`bgf`fgb`bgb`age`agb`cgc`agb`cgc`bge`dgb`egg`agb`bgf`bge`n`ngb`dgg`bgb`bgc`egb`bgb`agd`bgb`cgb`bgb`cgb`fgc`cgb`ege`cgb`bgb`igc`m`ngb`dgg`bgb`bgc`egb`bgb`bgc`bgb`cgb`bgb`cgb`agb`cgc`cgb`egb`agc`bgb`bgb`dgb`cgc`m`mgc`cgc`cgj`egc`agc`bgc`agg`cgg`agg`dgb`dgc`bgb`agc`agn`n`mgb`dgb`dgi`fgb`bgb`dgb`agf`egd`dge`egb`dgb`cge`bgg`age`o`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ト`ト`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`wea`♪ea`○ea`z`kem`beb`☉ec`}ec`y`jel`ced`●ee`{ee`eeb`q`iel`cef`░eg`yeg`dec`p`hel`eed`●ef`zef`cee`o`gel`geb`☉ee`{ee`beg`n`fea`hea`jea`웃ee`{ee`ceg`m`oea`⬆️ee`{ee`def`m`neb`jea`iea`eea`ieb`feb`fee`bea`nea`iee`eef`l`mec`iec`gec`cec`ged`ded`eee`aec`lec`hee`fef`k`led`hee`eee`aee`eef`bef`dej`jee`gee`gef`j`kee`geg`cem`ceg`aeg`dek`ief`fee`hef`i`kee`hef`dem`dee`cee`del`geh`eee`geh`h`kee`iee`eee`aef`dee`cee`dee`aef`fec`aef`dee`fec`aef`g`kee`iee`eee`bee`dee`cee`dee`bee`eed`aef`dee`eed`aef`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`dee`cee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`def`bee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`deg`aee`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`eel`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`fek`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`fek`dee`bee`dee`bee`dee`dee`bee`g`kee`iee`eee`bee`eeb`aec`aee`dee`bee`def`aed`eee`def`aed`h`kee`iee`eee`bee`eea`cea`bee`dee`bee`def`aec`fee`def`aec`i`kef`hee`eee`bee`eea`fee`dee`bee`eeh`gee`eeh`j`keg`gef`def`aef`cea`gee`def`aef`eeg`gef`eeg`j`kee`ieg`cen`bea`gee`den`eee`heg`eee`k`lec`ked`fed`ced`eea`eef`eed`ced`hec`jed`hec`l`mea`meb`heb`eeb`fea`def`geb`eeb`jea`leb`jea`m`ˇea`bef`け`∧eg`こ`❎ee`さ`▤ec`し`▥ea`す`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ogf`bgc`dgf`fgb`bgb`cgb`bge`dgb`cgb`cgd`bgh`bge`cgb`bgf`bgd`n`ngg`bgd`bgg`egc`agc`cgb`agg`bgc`cgb`bgf`agh`agg`agc`agg`agf`m`ngb`fge`bgb`cgb`egb`bgd`bgb`agb`cgc`agb`dgb`agb`cgb`dgb`dgb`cgb`agb`bgb`egb`cgb`m`ngb`egc`agb`bgb`bgb`fgb`bgd`bgb`agb`dgb`agb`dgb`agd`fgc`dgb`cgb`agb`bgb`egd`p`ngf`agb`bgb`bgf`fgb`bgb`age`agb`cgc`agb`cgc`bge`dgb`egg`agb`bgf`bge`n`ngb`dgg`bgb`bgc`egb`bgb`agd`bgb`cgb`bgb`cgb`fgc`cgb`ege`cgb`bgb`igc`m`ngb`dgg`bgb`bgc`egb`bgb`bgc`bgb`cgb`bgb`cgb`agb`cgc`cgb`egb`agc`bgb`bgb`dgb`cgc`m`mgc`cgc`cgj`egc`agc`bgc`agg`cgg`agg`dgb`dgc`bgb`agc`agn`n`mgb`dgb`dgi`fgb`bgb`dgb`agf`egd`dge`egb`dgb`cge`bgg`age`o`ナ`ナ`ナ`ナ`ナ`ナ`ナ`ナ"
+ -- decode and print
+ -- title screen
+ rle1(title,0,0,0)
+ print("v "..version,82,53,5)
+ print("press ❎ to start",32,70,blnkclr)
+ print("copyright (c) 2023",28,103,7)
+end
+
+function blink()
+ -- makes text change colour
+ blnkframe+=1
+ if blnkframe>blnkspd then
+  blnkframe=0
+  blnkindex+=1
+  if blnkindex>#blnkseq then
+   blnkindex=1
+  end
+  blnkclr=blnkseq[blnkindex]
+ end   
+end
+
+function draw_game()
  cls()
  draw_map()
  draw_cursor()
@@ -39,6 +111,16 @@ function is_tile(tile_type,x,y)
  tile=mget(x,y)
  has_flag=fget(tile, tile_type)
  return has_flag
+end
+
+function rle1(s,x0,y,tr)
+ -- jadelombax's string-based rendering system
+ local x,mw=x0,x0+ord(s,2)-96
+ for i=5,#s,2do
+  local col,len=ord(s,i)-96,ord(s,i+1)-96
+  if(col!=tr) line(x,y,x+len-1,y,col)
+  x+=len if(x>mw) x=x0 y+=1
+ end
 end
 -->8
 -- cursor code

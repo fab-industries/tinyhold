@@ -7,3 +7,7 @@ This is a project to design a small town/city building game for the PICO-8 fanta
 
 Fabian A. Scherschel,  
 November 2023
+
+### Credits
+
+* Uses [JadeLombax's string-based rendering system](https://www.lexaloffle.com/bbs/?tid=38829)
