@@ -10,4 +10,4 @@ November 2023
 
 ### Credits
 
-* Uses [JadeLombax's string-based rendering system](https://www.lexaloffle.com/bbs/?tid=38829)
+* Uses [JadeLombax's string-based graphics rendering system](https://www.lexaloffle.com/bbs/?tid=38829)
