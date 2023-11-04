@@ -1,6 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 41
 __lua__
+-- tinyhold 0.00.001
+-- by fab industries
+
 -- game loop
 
 function _init()
