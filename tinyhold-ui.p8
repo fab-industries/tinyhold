@@ -2,8 +2,8 @@
 
 function make_cursor()
  c={}
- c.x=3
- c.y=2
+ c.x=10
+ c.y=10
  c.sprite=16
 end
 
@@ -20,8 +20,8 @@ function move_cursor()
  if (btnp(⬆️)) newy-=1
  if (btnp(⬇️)) newy+=1
  
- c.x=mid(0,newx,128)
- c.y=mid(0,newy,64)
+ c.x=mid(0,newx,31)
+ c.y=mid(0,newy,25)
  
  if (is_tile(building,c.x,c.y)) then
   -- turn cursor yellow if on

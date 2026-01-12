@@ -9,10 +9,12 @@ end
 function draw_map()
  -- get the camera to follow
  -- the cursor
- mapx=flr(c.x/16)*16
- mapy=flr(c.y/14)*14
- camera(mapx*8,mapy*8)
- map (0,0,0,0,128,64)
+ mapx=c.x*8-60
+ mapy=c.y*8-60
+ mapx=mid(0,mapx,128)
+ mapy=mid(0,mapy,96)
+ camera(mapx,mapy)
+ map(0,0,0,0,32,32)
 end
 
 function anim_tiles()
@@ -75,14 +77,4 @@ function is_tile(tile_type,x,y)
  tile=mget(x,y)
  has_flag=fget(tile, tile_type)
  return has_flag
-end
-
-function rle1(s,x0,y,tr)
- -- jadelombax's string-based rendering system
- local x,mw=x0,x0+ord(s,2)-96
- for i=5,#s,2do
-  local col,len=ord(s,i)-96,ord(s,i+1)-96
-  if(col!=tr) line(x,y,x+len-1,y,col)
-  x+=len if(x>mw) x=x0 y+=1
- end
 end

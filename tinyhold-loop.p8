@@ -2,7 +2,7 @@
 
 function _init()
  version="0.00.001"
- state="logo"
+ state="game"
  t=0
  filt=0
  gt_hrs=0
