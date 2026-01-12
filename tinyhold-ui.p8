@@ -23,7 +23,7 @@ function move_cursor()
  c.x=mid(0,newx,31)
  c.y=mid(0,newy,25)
 
-cursor_col()
+ cursor_col()
 
 end
 
