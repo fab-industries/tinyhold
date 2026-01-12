@@ -4,6 +4,7 @@ function map_setup()
  -- sprite flags
  impass=0
  building=1
+ interact=2
 end
 
 function draw_map()

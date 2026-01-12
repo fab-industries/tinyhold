@@ -22,18 +22,31 @@ function move_cursor()
  
  c.x=mid(0,newx,31)
  c.y=mid(0,newy,25)
- 
- if (is_tile(building,c.x,c.y)) then
-  -- turn cursor yellow if on
-  -- building tile
-  c.sprite=32
- elseif (is_tile(impass,c.x,c.y)) then
-  -- if tile is impassable
-  c.sprite=32
- else
+
+cursor_col()
+
+end
+
+function cursor_col()
+
+  -- white cursor
   c.sprite=16
- end
- 
+
+  if (is_tile(impass,c.x,c.y)) then
+    -- red cursor
+    c.sprite=48
+  end
+  if (is_tile(interact,c.x,c.y)) then
+    -- yellow cursor
+    c.sprite=32
+  end
+  if (is_tile(building,c.x,c.y)) then
+    -- yellow cursor
+    c.sprite=32
+  end
+
+  return
+
 end
 
 -- interface code
